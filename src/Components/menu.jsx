@@ -1,17 +1,24 @@
 import React from "react";
-import style from "../style.module.css"
-const Menu = (props) => {
+import styles from "../styles.module.css"
+const Menu = ({menuItems}) => {
     return (
-        <article className={style.menuitem}>
-            <img src={props.menuItem.image} className={style.photo} />
-            <div className={style.iteminfo}>
+        <div className={styles.sectioncenter}>
+            {menuItems.map((menu)=>{
+                const {id, title, desc, price,image} = menu;
+                return <article key={id}  className={styles.menuitem}>
+                        <img src={image} className={styles.photo} />
+            <div className={styles.iteminfo}>
                 <header>
-                    <h4>{props.menuItem.title}</h4>
-                    <h4>{props.menuItem.price}</h4>
+                    <h4>{title}</h4>
+                    <h4 className={styles.price}>{price}</h4>
                 </header>
-                <p className={style.itemtext}>{props.menuItem.desc}</p>
+                <p className={styles.itemtext}>{desc}</p>
             </div>
-        </article>
+            </article>
+            })}
+            </div>
+        
+       
     )
 }
 export default Menu

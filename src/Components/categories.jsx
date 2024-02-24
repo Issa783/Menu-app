@@ -1,12 +1,15 @@
 import React from "react";
-import styles from "../style.module.css";
+import styles from "../styles.module.css";
 
-const Category = (props) => {
+const Category = ({categories,filteritems}) => {
     return (
         <div className={styles.btncontainer}>
-            <button type="button" className={styles.filterbtn} onClick={() => props.filteritems(props.category)}>
-                {props.category}
+            {categories.map((category)=>{
+                return  <button type="button" className={styles.filterbtn} onClick={() => filteritems(category)}>
+                {category}
             </button>
+            })}
+           
         </div>
     );
 };

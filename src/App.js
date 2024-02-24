@@ -1,38 +1,31 @@
 import React, { useState } from "react"
-import items from "./data"
-import style from "./style.module.css"
+import styles from "./styles.module.css"
 import Menu  from "./Components/menu"
 import Category from "./Components/categories"
-const allCategories =["All",...new Set(items.map((item) => {
-  return item.category;
-}))]
+import Data from "./data"
+const allCategories =["All",...new Set(Data.map((item) => item.category))]
 function App() {
-  const[menuItems,setMenuItems] = useState(items)
+  const[menuItems,setMenuItems] = useState(Data)
   const[categories,setCategories] = useState(allCategories)
   const filteritems = (category) => {
     if(category === "All"){
-      setMenuItems(items)
+      setMenuItems(Data)
       return;
     }
-      const newItem = items.filter((item) => item.category === category)
+      const newItem = Data.filter((item) => item.category === category)
       setMenuItems(newItem)
   }
  
-  const menuitem =   menuItems.map((menuItem) => {
-    return <Menu key={menuItem.id} menuItem = {menuItem} />
-  })
-  const categoryItem = categories.map((category,index) => {
-    return <Category key={index} category= {category} filteritems={filteritems}/>
-  })
+
   return (
     <main>
-      <section className={style.menusection}>
-        <div className={style.title}>
+      <section className={styles.menusection}>
+        <div className={styles.title}>
         <h2>Our Menu</h2>
-        <div className={style.underline}></div>
+        <div className={styles.underline}></div>
         </div>
-        {categoryItem}
-        {menuitem}
+       <Category categories={categories} filteritems = {filteritems} />
+       <Menu menuItems = {menuItems} />
       </section>
     </main>
   );
